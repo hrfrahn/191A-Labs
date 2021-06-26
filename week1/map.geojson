@@ -1,0 +1,1 @@
+{"type":"FeatureCollection","features":[{"type":"Feature","properties":{"places":"apartment","color":"blue"},"geometry":{"type":"Point","coordinates":[-118.45476686954497,34.06983140445738]}},{"type":"Feature","properties":{"places":"dykstra","color":"yellow"},"geometry":{"type":"Point","coordinates":[-118.45016956329346,34.07002692460065]}}]}
