@@ -22,16 +22,17 @@ ul{
 }
 p{
     margin-right: 5%;
+    margin-left: 5%;
 }
 .list-img{
     border-radius: 8px;
-    width: 250px;
-    height: 250px;
+    width: 40%;
+    height: 40%;
 }
 img{
     border-radius: 8px;
-    width: 500px;
-    height: 500px;
+    width: 70%;
+    height: 40%;
     display: block;
     margin-left: auto;
     margin-right: auto;
