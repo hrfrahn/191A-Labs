@@ -1,5 +1,6 @@
 const map = L.map('map').setView([34.0709, -118.444], 8);
-
+const colors = ["red", "blue", "green", "yellow"];
+let colorName = "";
 
 // Leaflet tile layer, i.e. the base map
 L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
@@ -15,7 +16,10 @@ fetch("camping.geojson")
             // the leaflet method for adding a geojson
             L.geoJSON(data, {
                 pointToLayer: function (feature, latlng) {
-                    return L.circleMarker(latlng, {color: "blue"});
+                    let x = Math.floor(Math.random()*colors.length)
+                    colorName = colors[x];
+                    colors.splice(x,1);
+                    return L.circleMarker(latlng, {color: colorName});
                 }
             }).bindPopup(function (layer) {
                 return layer.feature.properties.name;
