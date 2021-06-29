@@ -1,33 +1,52 @@
-html, body {
+/* html, body {
     padding: 5px;
- }
+ } */
 
- /* body {
-     display: grid;
-     grid-template-rows: .1fr .30fr .60fr .05fr;
-     grid-template-columns: 1fr;
-     grid-template-areas: "header" "main" "map"  "footer";
-     justify-content: center;
- }
-
- header {
-    grid-area: header;
+h1, h2, #footer{
+    text-align: center;
+}
+.wrapper{
     display: grid;
-    grid-template-columns: .2fr .6fr .2fr;
-    justify-content: center;
- }
-
-.main {
-    display: grid;
-    grid-area: main;
-    background-color: aqua;
-} */
-
+    grid-template-columns: 1fr 1fr;
+    grid-auto-rows: auto;
+}
+.left{
+    grid-column: 1 / 2;
+}
+.right{
+    grid-column: 2 / 2;
+}
+ul{
+    font-size: 20px;
+    margin-left: 100px;
+}
+p{
+    margin-right: 5%;
+}
+.list-img{
+    border-radius: 8px;
+    width: 250px;
+    height: 250px;
+}
+img{
+    border-radius: 8px;
+    width: 500px;
+    height: 500px;
+    display: block;
+    margin-left: auto;
+    margin-right: auto;
+}
+a{
+    margin: auto;
+}
 #map {
     grid-area: map;
+    border-radius: 8px;
     height: 70vh;
+    width: 60%;
+    margin: auto;
 }
-
 #footer {
     grid-area: footer;
+    margin: auto;
 }

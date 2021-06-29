@@ -1,18 +1,11 @@
-const map = L.map('map').setView([34.0709, -118.444], 13);
+const map = L.map('map').setView([34.0709, -118.444], 8);
 
 // Leaflet tile layer, i.e. the base map
 L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
 	attribution: '&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors'
 }).addTo(map);
-
-//JavaScript let variable declaration to create a marker
-let marker = L.marker([34.0709, -118.444]).addTo(map)
-		.bindPopup('Math Sciences 4328 aka the Technology Sandbox<br> is the lab where I work in ')
-		.openPopup();
-
-let marker2 = L.marker([34.0709, -118.454]).addTo(map)
-        
-fetch("map.geojson")
+      
+fetch("camping.geojson")
 	.then(response => {
 		return response.json();
 		})
@@ -21,9 +14,11 @@ fetch("map.geojson")
             // the leaflet method for adding a geojson
             L.geoJSON(data, {
                 pointToLayer: function (feature, latlng) {
-                    return L.circleMarker(latlng, {color: feature.properties.color});
+                    return L.circleMarker(latlng, {color: "red"});
                 }
             }).bindPopup(function (layer) {
-                return layer.feature.properties.places;
-            }).addTo(map);
+                return layer.feature.properties.name;
+            })
+            .addTo(map)
+            .openPopup();
         });
