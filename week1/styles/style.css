@@ -47,6 +47,13 @@ a{
     width: 60%;
     margin: auto;
 }
+#map2{
+    grid-area: map;
+    border-radius: 8px;
+    height: 70vh;
+    width: 60%;
+    margin: auto;
+}
 #footer {
     grid-area: footer;
     margin: auto;

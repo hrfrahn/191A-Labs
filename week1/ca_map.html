@@ -15,14 +15,26 @@
         </div>
 
         <div id="map"></div>
+        <p></p> <p></p>
+        <h2>rainbow map of CA</h2>
+        <div id ="map2"></div>
 
+        <div style = "text-align: center;">
+            <p></p>
+            <button type = "button" onclick="randomizeColors()">Click to randomize colors</button>
+            <p></p>
+        </div>
+        
+        <div id="footer">
+            Copyright(2021)
+        </div>
 
         <script>
             const map = L.map('map').setView([34.0709, -118.444], 5);
             const counties_visited = ["Humboldt", "Trinity", "Mendocino", "Sonoma", "Marin", "San Mateo", "Santa Clara", "San Francisco", "Los Angeles",
             "Monterey", "San Luis Obispo", "Kern", "Santa Barbara", "Ventura", "Orange", "San Diego", "Riverside", "Imperial", "San Bernardino",
             "Santa Cruz", "Alameda", "Mono", "Inyo", "Amador", "Merced", "Tuolumne", "Alpine", "El Dorado", "San Benito", "Stanislaus", "San Joaquin", "Calaveras",
-            "Mariposa", "Contra Costa", "Solano", "Napa"]
+            "Mariposa", "Contra Costa", "Solano", "Napa", "Yolo", "Sacramento"]
 
             // Leaflet tile layer, i.e. the base map
             L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
@@ -52,6 +64,47 @@
                         return layer.feature.properties.name;
                     }).addTo(map);
                 })
+
+            //create second map
+            let map2 = L.map('map2').setView([34.0709, -118.444], 5);
+            const colors = ["red", "blue", "green", "yellow", "purple", "orange", "cyan"];
+            L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
+                attribution: '&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors'
+            }).addTo(map2);
+
+            //add geoJSON & colors to second map
+            fetch("https://raw.githubusercontent.com/codeforamerica/click_that_hood/master/public/data/california-counties.geojson")
+                .then(response => {
+                    return response.json()  
+                })
+                .then(ca_counties =>{
+                    // Basic Leaflet method to add GeoJSON data
+                    L.geoJSON(ca_counties, {
+                        style: function(feature) {
+                            return {color: colors[Math.floor(Math.random()*colors.length)]}
+                        }
+                    }).bindPopup(function (layer) {
+                        return layer.feature.properties.name;
+                    }).addTo(map2);
+                })
+            function randomizeColors(){
+
+                fetch("https://raw.githubusercontent.com/codeforamerica/click_that_hood/master/public/data/california-counties.geojson")
+                .then(response => {
+                    return response.json()  
+                })
+                .then(ca_counties =>{
+                    // Basic Leaflet method to add GeoJSON data
+                    L.geoJSON(ca_counties, {
+                        style: function(feature) {
+                            
+                            return {color: colors[Math.floor(Math.random()*colors.length)]}
+                        }
+                    }).bindPopup(function (layer) {
+                        return layer.feature.properties.name;
+                    }).addTo(map2);
+                })
+            }
         </script>
     </body>
 </html>
