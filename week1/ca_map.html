@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <title>California County Map</title>
+        <link rel="stylesheet" href="styles/style.css">
+        <!-- Leaflet's css-->
+        <link rel="stylesheet" href="https://unpkg.com/leaflet@1.7.1/dist/leaflet.css" />
+        <!-- Leaflet's JavaScript-->
+        <script src="https://unpkg.com/leaflet@1.7.1/dist/leaflet.js"></script>
+    </head>
+    <body>
+        <h1>Week 1 Lab Assignment: Portfolio</h1>
+        <div class="main">
+            <h2>Counties in California that I've Visited</h2>
+        </div>
+
+        <div id="map"></div>
+
+
+        <script>
+            const map = L.map('map').setView([34.0709, -118.444], 5);
+            const counties_visited = ["Humboldt", "Trinity", "Mendocino", "Sonoma", "Marin", "San Mateo", "Santa Clara", "San Francisco", "Los Angeles",
+            "Monterey", "San Luis Obispo", "Kern", "Santa Barbara", "Ventura", "Orange", "San Diego", "Riverside", "Imperial", "San Bernardino",
+            "Santa Cruz", "Alameda", "Mono", "Inyo", "Amador", "Merced", "Tuolumne", "Alpine", "El Dorado", "San Benito", "Stanislaus", "San Joaquin", "Calaveras",
+            "Mariposa", "Contra Costa", "Solano", "Napa"]
+
+            // Leaflet tile layer, i.e. the base map
+            L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
+                attribution: '&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors'
+            }).addTo(map);
+
+            //return red if county is in visited list, grey otherwise
+            function getColor(county){
+                if(counties_visited.includes(county)){
+                    return "red";
+                }
+                return "grey";
+            }
+
+            //fetch open-source geoJSON for a map of CA county boundaries
+            fetch("https://raw.githubusercontent.com/codeforamerica/click_that_hood/master/public/data/california-counties.geojson")
+                .then(response => {
+                    return response.json()  
+                })
+                .then(ca_counties =>{
+                    // Basic Leaflet method to add GeoJSON data
+                    L.geoJSON(ca_counties, {
+                        style: function(feature) {
+                            return {color:getColor(feature.properties.name)}
+                        }
+                    }).bindPopup(function (layer) {
+                        return layer.feature.properties.name;
+                    }).addTo(map);
+                })
+        </script>
+    </body>
+</html>
