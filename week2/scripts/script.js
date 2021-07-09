@@ -35,4 +35,49 @@ addMarker(39, -122, "First Point", "1")
 addMarker(34, -122.484, "Second Point", "2")
 addMarker(34.0709, -188, "Third Point", "3")
 addMarker(34.5, -122, "Another Point", "aaaaa")
+
+const buttonElement = document.getElementById('buttonFirst Point')
+const button2 = document.getElementById('buttonSecond Point')
+const button3 = document.getElementById('buttonThird Point')
+const button4 = document.getElementById('buttonAnother Point')
+
+
+buttonElement.addEventListener("mouseover", function(event){
+	event.target.style.background = "green";
+})
+
+buttonElement.addEventListener("mouseleave", function(event){
+	event.target.style.background = "";
+
+})
+
+button2.addEventListener("mouseover", function(event){
+	event.target.style.background = "purple";
+})
+
+button2.addEventListener("mouseleave", function(event){
+	event.target.style.background = "";
+
+})
+
+button3.addEventListener("mouseover", function(event){
+	event.target.style.background = "blue";
+})
+
+button3.addEventListener("mouseleave", function(event){
+	event.target.style.background = "";
+
+})
+
+button4.addEventListener("mouseover", function(event){
+	event.target.style.background = "orange";
+})
+
+button4.addEventListener("mouseleave", function(event){
+	event.target.style.background = "";
+
+})
+
+
+
 console.log(myObj.name)
