@@ -12,3 +12,8 @@ body{
 #survey{
     grid-area: sidepanel;
 } 
+
+#randomizer{
+    width: 30%;
+    margin: auto;
+}

@@ -4,8 +4,8 @@ L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
     attribution: '&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors'
 }).addTo(myMap);
 
-
-
+let markerLocs = [];
+let markers = [];
 let url = "https://spreadsheets.google.com/feeds/list/1yNkjcTXq7NOerbJaU5qvy9XpW49yph1eUZtzjaE5B94/on7xd7h/public/values?alt=json"
 fetch(url)
 	.then(response => {
@@ -42,16 +42,26 @@ function addObjMarker(data){
     console.log(data.lat)
     console.log(data.long)
     if(data.doyouspeakenglishfluently == "Yes"){
-      L.marker([data.lat, data.long]).addTo(myMap).bindPopup(`<h3>Location: ${data.location}</h3><i>English Fluency: ${data.doyouspeakenglishfluently}</i>`)
+      markers.push(L.marker([data.lat, data.long]).addTo(myMap).bindPopup(`<h3>Location: ${data.location}</h3><i>English Fluency: ${data.doyouspeakenglishfluently}</i>`))
 
     }
     else{
-          L.marker([data.lat, data.long]).addTo(myMap).bindPopup(`<h3>Location: ${data.location}</h3><i>English Fluency: ${data.doyouspeakenglishfluently}<br>Language Spoken At Home: ${data.whatlanguagedoyouprimaryspeakathome}<br>Age: ${data.whatisyourage}</i>`)
+          markers.push(L.marker([data.lat, data.long]).addTo(myMap).bindPopup(`<h3>Location: ${data.location}</h3><i>English Fluency: ${data.doyouspeakenglishfluently}<br>Language Spoken At Home: ${data.whatlanguagedoyouprimaryspeakathome}<br>Age: ${data.whatisyourage}</i>`))
     }
+    markerLocs.push(L.latLng(data.lat, data.long))
 }    
 
 function addMarker(lat,lng,message){
         L.marker([lat,lng]).addTo(myMap).bindPopup(`<h2>${message}</h2>`)
         return message    
+}
+
+
+console.log(markers)
+function flyToRandom(){
+  let x = markers[Math.floor(Math.random()*markers.length)]
+  myMap.flyTo(x.getLatLng(), 7)
+  x.openPopup()
+  console.log("flying..")
 }
 
