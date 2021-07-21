@@ -41,7 +41,13 @@ fetch(url)
 function addObjMarker(data){
     console.log(data.lat)
     console.log(data.long)
-    L.marker([data.lat, data.long]).addTo(myMap).bindPopup(`<i>${data.location}</i>`)
+    if(data.doyouspeakenglishfluently == "Yes"){
+      L.marker([data.lat, data.long]).addTo(myMap).bindPopup(`<h3>Location: ${data.location}</h3><i>English Fluency: ${data.doyouspeakenglishfluently}</i>`)
+
+    }
+    else{
+          L.marker([data.lat, data.long]).addTo(myMap).bindPopup(`<h3>Location: ${data.location}</h3><i>English Fluency: ${data.doyouspeakenglishfluently}<br>Language Spoken At Home: ${data.whatlanguagedoyouprimaryspeakathome}<br>Age: ${data.whatisyourage}</i>`)
+    }
 }    
 
 function addMarker(lat,lng,message){
