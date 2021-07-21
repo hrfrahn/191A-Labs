@@ -1,0 +1,27 @@
+body{
+    display:grid;
+    grid-template-columns: 1fr 1fr 1fr; /* this creates an even two column layout*/
+    grid-template-rows: .2fr .7fr .1fr;
+    grid-template-areas: "header header header" "mappanel sidepanel survey" "footer footer footer" /* this creates one row with map panel on the left and sidepanel on the right */
+}
+
+#mapArea{
+    height:90vh;
+    grid-area: mappanel;
+} 
+
+#survey{
+    grid-area: survey;
+} 
+#contents{
+    grid-area: sidepanel;
+    display: grid;
+    grid-template-columns: 1fr; 
+}
+
+#header{
+    grid-area: header;
+}
+#footer{
+    grid-area: footer;
+}
